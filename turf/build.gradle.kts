@@ -4,8 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.publish)
     alias(libs.plugins.resources)
 }
 
@@ -93,18 +91,6 @@ kotlin {
 
 tasks.named("jsBrowserTest") { enabled = false }
 
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    // custom output directory
-    outputDirectory.set(buildDir.resolve("$rootDir/docs/api"))
-}
-
 tasks.withType(KotlinCompile::class.java).configureEach {
     compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
-}
-
-// Working around dokka problems
-afterEvaluate {
-    tasks.named("dokkaJavadocJar").configure {
-        dependsOn(":geojson:dokkaHtml")
-    }
 }

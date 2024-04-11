@@ -4,8 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.publish)
     alias(libs.plugins.kotlinx.benchmark)
 }
 
@@ -127,11 +125,6 @@ benchmark {
         register("jsBench")
         register("nativeBench")
     }
-}
-
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    // custom output directory
-    outputDirectory.set(buildDir.resolve("$rootDir/docs/api"))
 }
 
 tasks.withType(KotlinCompile::class.java).configureEach {
