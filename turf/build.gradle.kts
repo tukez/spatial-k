@@ -5,6 +5,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.resources)
+    id("maven-publish")
+}
+
+group = "io.github.tukez.spatialk"
+version = "0.4.0"
+
+publishing {
+    publications {
+        publications.withType<MavenPublication> {
+        }
+    }
 }
 
 kotlin {
